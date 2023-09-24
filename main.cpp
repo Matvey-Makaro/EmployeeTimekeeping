@@ -11,6 +11,9 @@
 #include "GUI/ShowNotificationWidget.h"
 #include "GUI/VacationRequestWidget.h"
 #include "GUI/CreateVacationRequestWidget.h"
+#include "GUI/BusinessTripListWidget.h"
+#include "GUI/ShowBusinessTripWidget.h"
+#include "GUI/ShowWorkScheduleWidget.h"
 
 #include <QApplication>
 
@@ -50,11 +53,20 @@ int main(int argc, char *argv[])
 //    ShowNotificationWidget showNotificationWidget;
 //    showNotificationWidget.show();
 
-    VacationRequestWidget vacationRequestWidget;
-    vacationRequestWidget.show();
+//    VacationRequestWidget vacationRequestWidget;
+//    vacationRequestWidget.show();
 
-    CreateVacationRequestWidget createVacationRequestWidget;
-    createVacationRequestWidget.show();
+//    CreateVacationRequestWidget createVacationRequestWidget;
+//    createVacationRequestWidget.show();
+
+//    BusinessTripListWidget businessTripListWidget;
+//    businessTripListWidget.show();
+
+//    ShowBusinessTripWidget showBusinessTripWidget;
+//    showBusinessTripWidget.show();
+
+    ShowWorkScheduleWidget showWorkScheduleWidget;
+    showWorkScheduleWidget.show();
 
     return a.exec();
 }

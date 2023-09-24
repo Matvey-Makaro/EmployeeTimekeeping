@@ -11,6 +11,7 @@ CONFIG += c++11
 SOURCES += \
     GUI/ActivityRecordWidget.cpp \
     GUI/Authorization.cpp \
+    GUI/BusinessTripListItem.cpp \
     GUI/BusinessTripListWidget.cpp \
     GUI/CreateReportWidget.cpp \
     GUI/CreateVacationRequestWidget.cpp \
@@ -19,8 +20,10 @@ SOURCES += \
     GUI/NotificationsListWidget.cpp \
     GUI/ReportHistoryWidget.cpp \
     GUI/ReportRecordWidget.cpp \
+    GUI/ShowBusinessTripWidget.cpp \
     GUI/ShowNotificationWidget.cpp \
     GUI/ShowTaskWidget.cpp \
+    GUI/ShowWorkScheduleWidget.cpp \
     GUI/TaskManagementWidget.cpp \
     GUI/TaskRecordWidget.cpp \
     GUI/VacationRequestWidget.cpp \
@@ -30,6 +33,7 @@ SOURCES += \
 HEADERS += \
     GUI/ActivityRecordWidget.h \
     GUI/Authorization.h \
+    GUI/BusinessTripListItem.h \
     GUI/BusinessTripListWidget.h \
     GUI/CreateReportWidget.h \
     GUI/CreateVacationRequestWidget.h \
@@ -38,8 +42,10 @@ HEADERS += \
     GUI/NotificationsListWidget.h \
     GUI/ReportHistoryWidget.h \
     GUI/ReportRecordWidget.h \
+    GUI/ShowBusinessTripWidget.h \
     GUI/ShowNotificationWidget.h \
     GUI/ShowTaskWidget.h \
+    GUI/ShowWorkScheduleWidget.h \
     GUI/TaskManagementWidget.h \
     GUI/TaskRecordWidget.h \
     GUI/VacationRequestWidget.h \
@@ -48,6 +54,7 @@ HEADERS += \
 FORMS += \
     GUI/ActivityRecordWidget.ui \
     GUI/Authorization.ui \
+    GUI/BusinessTripListItem.ui \
     GUI/BusinessTripListWidget.ui \
     GUI/CreateReportWidget.ui \
     GUI/CreateVacationRequestWidget.ui \
@@ -56,8 +63,10 @@ FORMS += \
     GUI/NotificationsListWidget.ui \
     GUI/ReportHistoryWidget.ui \
     GUI/ReportRecordWidget.ui \
+    GUI/ShowBusinessTripWidget.ui \
     GUI/ShowNotificationWidget.ui \
     GUI/ShowTaskWidget.ui \
+    GUI/ShowWorkScheduleWidget.ui \
     GUI/TaskManagementWidget.ui \
     GUI/TaskRecordWidget.ui \
     GUI/VacationRequestWidget.ui \
