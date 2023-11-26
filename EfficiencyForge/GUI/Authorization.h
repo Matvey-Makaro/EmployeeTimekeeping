@@ -1,6 +1,8 @@
 #pragma once
 
 #include <QWidget>
+#include <QSharedPointer>
+#include <QString>
 
 namespace Ui {
 class Authorization;
@@ -14,7 +16,14 @@ public:
     explicit Authorization(QWidget *parent = nullptr);
     ~Authorization();
 
-private:
+protected slots:
+    void on_EnterButton_clicked();
+
+signals:
+    void TryingLogIn(const QString& login, const QString& password);
+
+protected:
     Ui::Authorization *ui;
 };
 
+using AuthorizationShp = QSharedPointer<Authorization>;

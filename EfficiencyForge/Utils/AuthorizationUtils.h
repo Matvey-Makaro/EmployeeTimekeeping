@@ -1,9 +1,7 @@
 #pragma once
 
+#include <QString>
 
-class AuthorizationUtils
-{
-public:
-    AuthorizationUtils();
-};
+bool IsLoginCorrect(const QString& login);
+bool IsPasswordCorrect(const QString& password);
 

@@ -1,5 +1,5 @@
 #include "TestsRunner.h"
-#include "SimpleTest.h"
+#include "AuthorizationUtilsTests.h"
 #include "TestPlugin.h"
 
 
@@ -11,5 +11,5 @@ TestPlugin::TestPlugin(QString outputPath, QString specificFormat) :
 void TestPlugin::Run() const
 {
     TestsRunner runner(_outputPath, _specificFormat);
-    runner.RunTest<SimpleTest>();
+    runner.RunTest<AuthorizationUtilsTests>();
 }
