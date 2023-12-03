@@ -6,6 +6,7 @@
 
 class AppModel : public IAppModel
 {
+    Q_OBJECT
 public:
     AppModel();
     ~AppModel() = default;

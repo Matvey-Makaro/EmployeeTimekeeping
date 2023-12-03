@@ -1,3 +1,4 @@
+#include <QDebug>
 #include "AppModel.h"
 
 AppModel::AppModel()
@@ -17,6 +18,7 @@ UserShp AppModel::GetCurrUser() const
 
 void AppModel::OnTryingLogIn(const QString &login, const QString &password)
 {
+    qDebug() << "AppModel::OnTryingLogIn()" << "login:" << login << "password:" << password;
     // TODO: Check correctness of login and password
 
 }

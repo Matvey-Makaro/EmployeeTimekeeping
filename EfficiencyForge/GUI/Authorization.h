@@ -16,11 +16,11 @@ public:
     explicit Authorization(QWidget *parent = nullptr);
     ~Authorization();
 
-protected slots:
-    void on_EnterButton_clicked();
-
 signals:
     void TryingLogIn(const QString& login, const QString& password);
+
+protected slots:
+    void on_EnterButton_clicked();
 
 protected:
     Ui::Authorization *ui;

@@ -6,7 +6,6 @@
 #include "Entities/User.h"
 
 
-
 class IAppModel : public QObject
 {
 public:

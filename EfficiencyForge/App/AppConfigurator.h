@@ -1,18 +1,24 @@
 #pragma once
 
-
+#include <QObject>
 #include <QSharedPointer>
+#include "AppConfig.h"
 
-class AppConfigurator
+class AppConfigurator : public QObject
 {
+    Q_OBJECT
 public:
-    AppConfigurator() = default;
+    AppConfigurator(AppConfigShp appConfig, QObject* parent = nullptr);
 
     void Run();
 
 private:
+    void CreateDB();
     void Authorization();
     void MainWork();
+
+private:
+    AppConfigShp _appConfig;
 
 };
 
