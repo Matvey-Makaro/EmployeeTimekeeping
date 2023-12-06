@@ -1,10 +1,9 @@
 #include <QDebug>
 #include "AppModel.h"
 
-AppModel::AppModel()
-{
-
-}
+AppModel::AppModel(QObject* parent) :
+    QObject(parent)
+{}
 
 bool AppModel::IsAuthorized() const
 {
@@ -20,6 +19,8 @@ void AppModel::OnTryingLogIn(const QString &login, const QString &password)
 {
     qDebug() << "AppModel::OnTryingLogIn()" << "login:" << login << "password:" << password;
     // TODO: Check correctness of login and password
+
+
 
 }
 

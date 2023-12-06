@@ -15,5 +15,7 @@ Authorization::~Authorization()
 
 void Authorization::on_EnterButton_clicked()
 {
-
+    QString login = ui->LoginLineEdit->text();
+    QString password = ui->PasswordLineEdit->text();
+    emit TryingLogIn(login, password);
 }

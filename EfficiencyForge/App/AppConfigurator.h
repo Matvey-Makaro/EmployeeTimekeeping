@@ -3,6 +3,8 @@
 #include <QObject>
 #include <QSharedPointer>
 #include "AppConfig.h"
+#include "AppModel.h"
+#include "GUI/Authorization.h"
 
 class AppConfigurator : public QObject
 {
@@ -19,7 +21,8 @@ private:
 
 private:
     AppConfigShp _appConfig;
-
+    AuthorizationShp _authorizationWidget;
+    AppModelShp _appModel;
 };
 
 using AppConfiguratorShp = QSharedPointer<AppConfigurator>;

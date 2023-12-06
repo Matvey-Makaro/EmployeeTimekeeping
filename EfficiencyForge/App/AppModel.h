@@ -1,21 +1,21 @@
 #pragma once
 
+#include <QObject>
 #include <QSharedPointer>
 #include "Entities/User.h"
-#include "IAppModel.h"
 
-class AppModel : public IAppModel
+class AppModel : public QObject
 {
     Q_OBJECT
 public:
-    AppModel();
+    AppModel(QObject* parent = nullptr);
     ~AppModel() = default;
 
-    virtual bool IsAuthorized() const override;
-    virtual UserShp GetCurrUser() const override;
+    bool IsAuthorized() const;
+    UserShp GetCurrUser() const;
 
 public slots:
-    virtual void OnTryingLogIn(const QString& login, const QString& password) override;
+    void OnTryingLogIn(const QString& login, const QString& password);
 
 private:
     UserShp _currUser;
