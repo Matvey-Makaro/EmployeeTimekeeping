@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
     AppConfigurator appConfigurator(cfg);
     appConfigurator.Run();
 
-    MainWindow w;
-    w.show();
+//    MainWindow w;
+//    w.show();
     return a.exec();
 }

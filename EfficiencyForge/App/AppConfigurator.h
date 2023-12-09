@@ -3,7 +3,7 @@
 #include <QObject>
 #include <QSharedPointer>
 #include "AppConfig.h"
-#include "AppModel.h"
+#include "AppController.h"
 #include "GUI/Authorization.h"
 
 class AppConfigurator : public QObject

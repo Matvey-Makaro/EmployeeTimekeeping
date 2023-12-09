@@ -47,6 +47,9 @@ public:
     WorkScheduleShp GetWorkSchedule() const;
     void SetWorkSchedule(const WorkScheduleShp& workSchedule);
 
+    QString GetShortFullName() const;
+    QString GetFullName() const;
+
 private:
     Id _id;
     QString _name;

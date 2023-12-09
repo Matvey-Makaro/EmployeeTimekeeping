@@ -1,10 +1,12 @@
 #include <QDebug>
 #include <QVariant>
+#include <QSqlError>
 #include "DAL/DB.h"
 #include "PositionGateway.h"
 #include "DepartmentGateway.h"
 #include "WorkScheduleGateway.h"
 #include "UserGateway.h"
+#include "Flags.h"
 
 namespace
 {
@@ -22,7 +24,9 @@ static const QString WorkScheduleIdFieldName = "work_schedule_id";
 }
 
 
-UserShp UserGateway::SelectUserByLoginPassword(const QString& login, const QString& password)
+UserShp UserGateway::SelectUserByLoginPassword(const QString& login,
+                                               const QString& password,
+                                               ILogger* l)
 {
     Prepare(GetSelectByLoginPasswordQuery());
     BindValue(":login", login);
@@ -30,7 +34,8 @@ UserShp UserGateway::SelectUserByLoginPassword(const QString& login, const QStri
 
     if(!Exec())
     {
-        // TODO: Handle error
+        if(l)
+            l->WriteCritical(FromFlags::UserGateway, CodeFlags::ExecError, _query.lastError().databaseText());
         return UserShp();
     }
 
@@ -38,7 +43,8 @@ UserShp UserGateway::SelectUserByLoginPassword(const QString& login, const QStri
 
     if(!_query.next())
     {
-        // TODO: Not Found!
+        if(l)
+            l->WriteWarning(FromFlags::UserGateway, CodeFlags::NotFound, "User not found");
         return UserShp();
     }
     Q_ASSERT_X(_query.size() == 1,

@@ -10,6 +10,8 @@
 #include "BLL/OperationModelImpl.h"
 #include "BLL/Operations/AuthorizationOperation.h"
 
+#include "App/DataPool.h"
+
 AppConfigurator::AppConfigurator(AppConfigShp appConfig, QObject* parent) :
     QObject(parent),
     _appConfig(std::move(appConfig))
@@ -18,12 +20,13 @@ AppConfigurator::AppConfigurator(AppConfigShp appConfig, QObject* parent) :
 void AppConfigurator::Run()
 {
     CreateDB();
-    Authorization();
 
     IOperationVisitorShp opVisitor = OperationDispatcherVisitorShp::create();
     IOperationModelShp operationModel = OperationModelImplShp::create(opVisitor);
-    auto op = AuthorizationOperationShp::create();
-    operationModel->DoOperation(op);
+    _appModel = AppModelShp::create(operationModel,
+                                    DataPoolShp::create());
+
+//    Authorization();
 }
 
 void AppConfigurator::CreateDB()
@@ -51,8 +54,7 @@ void AppConfigurator::CreateDB()
 void AppConfigurator::Authorization()
 {
     _authorizationWidget = AuthorizationShp::create();
-    _appModel = AppModelShp::create();
+    connect(_authorizationWidget.data(), &Authorization::TryingLogIn, _appModel.data(), &AppController::OnTryingLogIn);
 
-    connect(_authorizationWidget.data(), &Authorization::TryingLogIn, _appModel.data(), &AppModel::OnTryingLogIn);
     _authorizationWidget->show();
 }

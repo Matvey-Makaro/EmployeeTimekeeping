@@ -7,13 +7,14 @@ using CodeFlag = int64_t;
 
 namespace FromFlags
 {
-constexpr FromFlag tmp = 1;
+constexpr FromFlag UserGateway = 1;
 }
 
 namespace CodeFlags
 {
 constexpr CodeFlag Success = 1;
-
+constexpr CodeFlag ExecError = 1;
+constexpr CodeFlag NotFound = 1;
 }
 
 

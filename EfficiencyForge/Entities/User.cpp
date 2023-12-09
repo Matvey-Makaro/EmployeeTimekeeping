@@ -96,3 +96,13 @@ void User::SetWorkSchedule(const WorkScheduleShp& workSchedule)
 {
     _workSchedule = workSchedule;
 }
+
+QString User::GetShortFullName() const
+{
+    return _surname + " " + _name;
+}
+
+QString User::GetFullName() const
+{
+    return _surname + " " + _name + " " + _patronymic;
+}
