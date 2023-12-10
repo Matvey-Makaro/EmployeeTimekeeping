@@ -137,4 +137,6 @@ TaskStatus TaskGateway::ToTaskStatus(const QString& str)
         return TaskStatus::InReview;
     if(str == "Backlog")
         return TaskStatus::Backlog;
+    Q_ASSERT(false);
+    return TaskStatus::Open;
 }

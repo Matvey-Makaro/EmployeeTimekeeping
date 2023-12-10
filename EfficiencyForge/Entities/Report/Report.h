@@ -20,6 +20,7 @@ public:
     Report(Id id = -1);
 
     Id GetId() const;
+    void SetId(const Id& id);
 
     QVector<ReportItemShp> GetItems() const;
     void SetItems(const QVector<ReportItemShp>& items);
