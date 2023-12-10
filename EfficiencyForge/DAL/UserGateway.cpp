@@ -24,7 +24,7 @@ static const QString WorkScheduleIdFieldName = "work_schedule_id";
 }
 
 
-UserShp UserGateway::SelectUserByLoginPassword(const QString& login,
+UserShp UserGateway::GetUserByLoginPassword(const QString& login,
                                                const QString& password,
                                                ILogger* l)
 {
@@ -54,13 +54,63 @@ UserShp UserGateway::SelectUserByLoginPassword(const QString& login,
     return CreateUser();
 }
 
+UserShp UserGateway::GetById(Id id, ILogger* l)
+{
+    Prepare(GetSelectByIdQuery());
+    BindValue(":id", id);
+
+    if(!Exec())
+    {
+        if(l)
+            l->WriteCritical(FromFlags::UserGateway, CodeFlags::ExecError, _query.lastError().databaseText());
+        return {};
+    }
+
+    if(!_query.next())
+    {
+        if(l)
+            l->WriteWarning(FromFlags::UserGateway, CodeFlags::NotFound, "User not found");
+        return {};
+    }
+    return CreateUser(l);
+}
+
+QVector<UserShp> UserGateway::GetAll(ILogger* l)
+{
+    Prepare(GetSelectAllQuery());
+    if(!Exec())
+    {
+        if(l)
+            l->WriteCritical(FromFlags::UserGateway, CodeFlags::ExecError, _query.lastError().databaseText());
+        return {};
+    }
+
+    QVector<UserShp> result;
+    result.reserve(_query.size());
+    while(_query.next())
+    {
+       result.push_back(CreateUser(l));
+    }
+    return result;
+}
+
 QString UserGateway::GetSelectByLoginPasswordQuery()
 {
     static const QString query = QStringLiteral("SELECT * FROM User WHERE login = :login AND password = :password;");
     return query;
 }
 
-UserShp UserGateway::CreateUser()
+QString UserGateway::GetSelectByIdQuery()
+{
+    return QStringLiteral("SELECT * FROM User WHERE user_id = :id;");
+}
+
+QString UserGateway::GetSelectAllQuery()
+{
+    return QStringLiteral("SELECT * FROM User;");
+}
+
+UserShp UserGateway::CreateUser(ILogger* l)
 {
     Id id = GetValueByName(UserIdFieldName).toLongLong();
     auto user = UserShp::create(id);

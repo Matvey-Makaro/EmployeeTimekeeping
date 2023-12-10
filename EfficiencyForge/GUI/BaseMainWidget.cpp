@@ -40,6 +40,7 @@ void BaseMainWidget::FillTabToWidget()
     _tabToWidget[Tabs::CreateReport] = new CreateReportWidget(Report::CreateEmpty(),
                                                               _user,
                                                               {},
+                                                              {},
                                                               this);
     _tabToWidget[Tabs::ReportHistory] = new  ReportHistoryWidget(this);
 
@@ -81,9 +82,17 @@ void BaseMainWidget::on_createReportBtn_clicked()
     auto* widget = new CreateReportWidget(Report::CreateEmpty(),
                                           _user,
                                           _dataPool->GetReportItemTypes(),
+                                          _dataPool->GetTasksByAssigneeId(_user->GetId()),
                                           this);
-    widget->SetReportItemTypes(_dataPool->GetReportItemTypes());
+
+    connect(widget, &CreateReportWidget::Saving, this, &BaseMainWidget::OnSaveReport);
+
     _tabToWidget[Tabs::CreateReport] = widget;
     ui->stackedWidget->insertWidget(Tabs::CreateReport, widget);
     ui->stackedWidget->setCurrentIndex(Tabs::CreateReport);
+}
+
+void BaseMainWidget::OnSaveReport(const ReportShp& report)
+{
+    emit SavingReport(report);
 }

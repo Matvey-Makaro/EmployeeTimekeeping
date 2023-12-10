@@ -10,7 +10,7 @@ bool FindUserByLoginPasswordCommand::Validate()
 void FindUserByLoginPasswordCommand::Do()
 {
     UserGateway gateway;
-    auto user = gateway.SelectUserByLoginPassword(_login, _password, &_logger);
+    auto user = gateway.GetUserByLoginPassword(_login, _password, &_logger);
     if(_logger.HasCriticals())
     {
         emit Failed();

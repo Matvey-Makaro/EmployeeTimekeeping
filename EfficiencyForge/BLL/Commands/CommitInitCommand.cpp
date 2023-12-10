@@ -7,7 +7,8 @@ bool CommitInitCommand::Validate()
 
 void CommitInitCommand::Do()
 {
-    _dataPool->SetReportItemTypes(_ctx->_reportItemTypes);
+    _dataPool->SetReportItemTypes(_ctx->reportItemTypes);
+    _dataPool->SetTasks(_ctx->tasks);
     emit Finished();
 }
 

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "InitContext.h"
-#include "AbstractCommand.h"
+#include "BLL/Commands/InitContext.h"
+#include "BLL/Commands/AbstractCommand.h"
 
 class LoadAllReportItemTypesCommand : public AbstractCommand
 {

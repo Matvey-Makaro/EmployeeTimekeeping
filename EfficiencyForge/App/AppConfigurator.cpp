@@ -49,7 +49,7 @@ void AppConfigurator::CreateDB()
     auto department = departmentGateway.GetById(1);
 
     UserGateway userGateway;
-    auto user1 = userGateway.SelectUserByLoginPassword("Root", "root");
+    auto user1 = userGateway.GetUserByLoginPassword("Root", "root");
 
     double deleteLater = 0;
 }

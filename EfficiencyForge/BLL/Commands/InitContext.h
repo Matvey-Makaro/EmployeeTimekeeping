@@ -3,9 +3,11 @@
 #include <QSharedPointer>
 #include <QVector>
 #include "Entities/Report/ReportItemType.h"
+#include "Entities/Task/Task.h"
 
 struct InitContext
 {
-    QVector<ReportItemTypeShp> _reportItemTypes;
+    QVector<ReportItemTypeShp> reportItemTypes;
+    QVector<TaskShp> tasks;
 };
 using InitContextShp = QSharedPointer<InitContext>;

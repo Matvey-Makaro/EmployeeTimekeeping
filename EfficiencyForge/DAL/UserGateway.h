@@ -11,14 +11,18 @@ class UserGateway : public AbstractGateway
 {
 public:
     UserGateway() = default;
-    UserShp SelectUserByLoginPassword(const QString& login,
-                                      const QString& password,
-                                      ILogger* l = nullptr);
+    UserShp GetUserByLoginPassword(const QString& login,
+                                   const QString& password,
+                                   ILogger* l = nullptr);
+    UserShp GetById(Id id, ILogger* l = nullptr);
+    QVector<UserShp> GetAll(ILogger* l = nullptr);
 
 protected:
     static QString GetSelectByLoginPasswordQuery();
+    static QString GetSelectByIdQuery();
+    static QString GetSelectAllQuery();
 
-    UserShp CreateUser();
+    UserShp CreateUser(ILogger* l = nullptr);
     PositionShp LoadPosition(Id positionId) const;
     DepartmentShp LoadDepartment(Id departmentId) const;
     WorkScheduleShp LoadWorkSchedule(Id workScheduleId) const;

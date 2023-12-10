@@ -4,7 +4,8 @@
 #include "Commands/CommitCurrUserCommand.h"
 #include "Commands/FindUsersContext.h"
 
-#include "Commands/LoadAllReportItemTypesCommand.h"
+#include "Commands/LoadALLCommands/LoadAllReportItemTypesCommand.h"
+#include "Commands/LoadALLCommands/LoadAllTasksCommand.h"
 #include "Commands/CommitInitCommand.h"
 #include "Commands/InitContext.h"
 
@@ -33,12 +34,20 @@ ICommandRunnerShp OperationDispatcherVisitor::Visit(InitOperation* op)
     auto ctx = InitContextShp::create();
     auto loadAllReportItemTypesCmd = LoadAllReportItemTypesCommandShp::create();
     loadAllReportItemTypesCmd->SetCtx(ctx);
+    auto loadAllTasks = LoadAllTasksCommandShp::create();
+    loadAllTasks->SetCtx(ctx);
     auto commitCmd = CommitInitCommandShp::create();
     commitCmd->SetCtx(ctx);
     commitCmd->SetDataPool(op->GetDataPool());
 
     auto runner = ChainCommandRunnerShp::create();
     runner->AddCommand(loadAllReportItemTypesCmd);
+    runner->AddCommand(loadAllTasks);
     runner->AddCommand(commitCmd);
     return runner;
+}
+
+ICommandRunnerShp OperationDispatcherVisitor::Visit(SaveReportOperation* op)
+{
+
 }

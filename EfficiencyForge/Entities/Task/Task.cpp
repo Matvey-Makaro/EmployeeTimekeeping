@@ -14,34 +14,34 @@ void Task::SetProject(const ProjectShp& project)
     _project = project;
 }
 
-UserShp Task::GetReporterId() const
+UserShp Task::GetReporter() const
 {
-    return _reporterId;
+    return _reporter;
 }
 
-void Task::SetReporterId(const UserShp& reporterId)
+void Task::SetReporter(const UserShp& reporterId)
 {
-    _reporterId = reporterId;
+    _reporter = reporterId;
 }
 
-UserShp Task::GetAssigneeId() const
+UserShp Task::GetAssignee() const
 {
-    return _assigneeId;
+    return _assignee;
 }
 
-void Task::SetAssigneeId(const UserShp& assigneeId)
+void Task::SetAssignee(const UserShp& assigneeId)
 {
-    _assigneeId = assigneeId;
+    _assignee = assigneeId;
 }
 
-TaskTypeShp Task::GetTaskTypeId() const
+TaskTypeShp Task::GetTaskType() const
 {
-    return _taskTypeId;
+    return _taskType;
 }
 
-void Task::SetTaskTypeId(const TaskTypeShp& taskTypeId)
+void Task::SetTaskType(const TaskTypeShp& taskTypeId)
 {
-    _taskTypeId = taskTypeId;
+    _taskType = taskTypeId;
 }
 
 QDateTime Task::GetCreationTime() const

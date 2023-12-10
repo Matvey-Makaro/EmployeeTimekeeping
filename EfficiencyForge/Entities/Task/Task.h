@@ -28,14 +28,14 @@ public:
     ProjectShp GetProject() const;
     void SetProject(const ProjectShp& project);
 
-    UserShp GetReporterId() const;
-    void SetReporterId(const UserShp& reporterId);
+    UserShp GetReporter() const;
+    void SetReporter(const UserShp& reporterId);
 
-    UserShp GetAssigneeId() const;
-    void SetAssigneeId(const UserShp& assigneeId);
+    UserShp GetAssignee() const;
+    void SetAssignee(const UserShp& assigneeId);
 
-    TaskTypeShp GetTaskTypeId() const;
-    void SetTaskTypeId(const TaskTypeShp& taskTypeId);
+    TaskTypeShp GetTaskType() const;
+    void SetTaskType(const TaskTypeShp& taskTypeId);
 
     QDateTime GetCreationTime() const;
     void SetCreationTime(const QDateTime& creationTime);
@@ -61,9 +61,9 @@ public:
 private:
     Id _id;
     ProjectShp _project;
-    UserShp _reporterId;
-    UserShp _assigneeId;
-    TaskTypeShp _taskTypeId;
+    UserShp _reporter;
+    UserShp _assignee;
+    TaskTypeShp _taskType;
     QDateTime _creationTime;
     int _timeSpent;
     int _timeGiven;

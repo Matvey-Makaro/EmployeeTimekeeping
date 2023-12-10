@@ -11,7 +11,7 @@ bool LoadAllReportItemTypesCommand::Validate()
 void LoadAllReportItemTypesCommand::Do()
 {
     ReportItemTypeGateway gateway;
-    _ctx->_reportItemTypes = gateway.GetAll(&_logger);
+    _ctx->reportItemTypes = gateway.GetAll(&_logger);
     emit Finished();
 }
 

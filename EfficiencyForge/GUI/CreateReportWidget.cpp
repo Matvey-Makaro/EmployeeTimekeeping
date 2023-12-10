@@ -6,13 +6,15 @@
 CreateReportWidget::CreateReportWidget(ReportShp report,
                                        UserShp currUser,
                                        QVector<ReportItemTypeShp> itemTypes,
+                                       QVector<TaskShp> tasks,
                                        QWidget* parent) :
     QWidget(parent),
     _ui(new Ui::CreateReportWidget),
     _reportViewModel(new ReportTableViewModel(this)),
     _report(std::move(report)),
     _currUser(std::move(currUser)),
-    _reportItemTypes(std::move(itemTypes))
+    _reportItemTypes(std::move(itemTypes)),
+    _tasks(std::move(tasks))
 {
     Q_ASSERT_X(!_report.isNull(), "CreateReportWidget::CreateReportWidget",
                "_report.isNull()");
@@ -30,8 +32,6 @@ CreateReportWidget::~CreateReportWidget()
 
 ReportShp CreateReportWidget::GetReport() const
 {
-    // TODO: Update report
-
     return _report;
 }
 
@@ -51,9 +51,12 @@ void CreateReportWidget::SetupUi()
     _ui->setupUi(this);
 
     _reportViewModel->SetItemTypes(_reportItemTypes);
+    _reportViewModel->SetItems(_report->GetItems());
+    _reportViewModel->SetTasks(_tasks);
 
     ReportItemDelegate* delegate = new ReportItemDelegate(_ui->tableView);
     delegate->SetItemTypes(_reportItemTypes);
+    delegate->SetTasks(_tasks);
     _ui->tableView->setModel(_reportViewModel);
     _ui->tableView->setItemDelegate(delegate);
     _ui->tableView->setEditTriggers(QTableView::DoubleClicked);
@@ -61,8 +64,6 @@ void CreateReportWidget::SetupUi()
     _ui->dateEdit->setDate(_report->GetDate());
     _ui->startTimeEdit->setTime(_report->GetStartWorkingDay());
     _ui->endTimeEdit->setTime(_report->GetEndWorkingDay());
-
-    _reportViewModel->SetItems(_report->GetItems());
 }
 
 QVector<ReportItemTypeShp> CreateReportWidget::GetReportItemTypes() const

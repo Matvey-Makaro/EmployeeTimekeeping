@@ -33,9 +33,13 @@ public:
     DataPoolShp GetDataPool() const;
     void SetDataPool(const DataPoolShp& dataPool);
 
+signals:
+    void SavingReport(const ReportShp&);
+
 private slots:
     void on_reportHistoryBtn_clicked();
     void on_createReportBtn_clicked();
+    void OnSaveReport(const ReportShp&);
 
 private:
     void FillTabToWidget();

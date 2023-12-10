@@ -3,6 +3,7 @@
 #include <QSharedPointer>
 #include "Operations/AuthorizationOperation.h"
 #include "Operations/InitOperation.h"
+#include "Operations/SaveReportOperation.h"
 #include "BLL/ICommandRunner.h"
 
 class IOperationVisitor
@@ -12,5 +13,6 @@ public:
 
     virtual ICommandRunnerShp Visit(AuthorizationOperation* op) = 0;
     virtual ICommandRunnerShp Visit(InitOperation* op) = 0;
+    virtual ICommandRunnerShp Visit(SaveReportOperation* op) = 0;
 };
 using IOperationVisitorShp = QSharedPointer<IOperationVisitor>;

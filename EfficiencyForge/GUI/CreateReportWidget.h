@@ -3,6 +3,7 @@
 #include <QWidget>
 #include "Entities/Report/Report.h"
 #include "Entities/User.h"
+#include "Entities/Task/Task.h"
 #include "ViewModels/ReportTableViewModel.h"
 
 namespace Ui {
@@ -18,6 +19,7 @@ public:
     explicit CreateReportWidget(ReportShp report,
                                 UserShp currUser,
                                 QVector<ReportItemTypeShp> itemTypes,
+                                QVector<TaskShp> tasks,
                                 QWidget *parent = nullptr);
     ~CreateReportWidget();
 
@@ -44,5 +46,6 @@ private:
     ReportShp _report;
     UserShp _currUser;
     QVector<ReportItemTypeShp> _reportItemTypes;
+    QVector<TaskShp> _tasks;
 };
 

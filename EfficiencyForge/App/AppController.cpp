@@ -34,12 +34,19 @@ void AppController::OnCurrUserChanged(const UserShp& u)
     OnLogInFinished(u);
 }
 
+void AppController::OnSavingReport(const ReportShp& report)
+{
+
+}
+
 void AppController::OnLogInFinished(const UserShp& user)
 {
     InitLoad();
     _authorizationWidget->close();
     _baseMainWidget = BaseMainWidgetShp::create(user);
     _baseMainWidget->SetDataPool(_dataPool);
+    connect(_baseMainWidget.data(), &BaseMainWidget::SavingReport, this, &AppController::OnSavingReport);
+
     _baseMainWidget->show();
 }
 

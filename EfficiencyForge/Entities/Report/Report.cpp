@@ -76,3 +76,8 @@ void Report::SetUser(const UserShp& user)
 {
     _user = user;
 }
+
+void Report::SetId(const Id& id)
+{
+    _id = id;
+}

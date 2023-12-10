@@ -9,5 +9,6 @@ public:
 
     ICommandRunnerShp Visit(AuthorizationOperation* op) override;
     ICommandRunnerShp Visit(InitOperation* op) override;
+    ICommandRunnerShp Visit(SaveReportOperation* op) override;
 };
 using OperationDispatcherVisitorShp = QSharedPointer<OperationDispatcherVisitor>;

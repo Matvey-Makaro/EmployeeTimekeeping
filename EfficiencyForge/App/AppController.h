@@ -24,6 +24,7 @@ signals:
 public slots:
     void OnTryingLogIn(const QString& login, const QString& password);
     void OnCurrUserChanged(const UserShp& u);
+    void OnSavingReport(const ReportShp& report);
 
 protected slots:
     void OnLogInFinished(const UserShp& user);
