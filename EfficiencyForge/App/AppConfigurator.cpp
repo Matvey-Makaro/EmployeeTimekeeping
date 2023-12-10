@@ -10,6 +10,8 @@
 #include "BLL/OperationModelImpl.h"
 #include "BLL/Operations/AuthorizationOperation.h"
 
+#include "Utils/Loggers/DebugLogger.h"
+
 #include "App/DataPool.h"
 
 AppConfigurator::AppConfigurator(AppConfigShp appConfig, QObject* parent) :
@@ -22,7 +24,8 @@ void AppConfigurator::Run()
     CreateDB();
 
     IOperationVisitorShp opVisitor = OperationDispatcherVisitorShp::create();
-    IOperationModelShp operationModel = OperationModelImplShp::create(opVisitor);
+    auto operationModel = OperationModelImplShp::create(opVisitor);
+    operationModel->AddLogger(DebugLoggerShp::create());
     _appModel = AppModelShp::create(operationModel,
                                     DataPoolShp::create());
 

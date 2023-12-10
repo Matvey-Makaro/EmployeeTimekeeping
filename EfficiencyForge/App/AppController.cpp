@@ -1,5 +1,6 @@
 #include <QDebug>
 #include "BLL/Operations/AuthorizationOperation.h"
+#include "BLL/Operations/InitOperation.h"
 #include "AppController.h"
 
 AppController::AppController(IOperationModelShp opModel, DataPoolShp dataPool, QObject* parent) :
@@ -12,7 +13,7 @@ AppController::AppController(IOperationModelShp opModel, DataPoolShp dataPool, Q
     ConnectWithDataPool();
     ConnectWithAuthorizationWidget();
     Start();
-    FillDebugData();
+//    FillDebugData();
 }
 
 void AppController::OnTryingLogIn(const QString &login, const QString &password)
@@ -35,6 +36,7 @@ void AppController::OnCurrUserChanged(const UserShp& u)
 
 void AppController::OnLogInFinished(const UserShp& user)
 {
+    InitLoad();
     _authorizationWidget->close();
     _baseMainWidget = BaseMainWidgetShp::create(user);
     _baseMainWidget->SetDataPool(_dataPool);
@@ -55,6 +57,15 @@ void AppController::ConnectWithAuthorizationWidget() const
 void AppController::Start()
 {
     _authorizationWidget->show();
+}
+
+void AppController::InitLoad()
+{
+    qDebug() << "AppModel::InitLoad() start";
+
+    auto op = InitOperationShp::create();
+    op->SetDataPool(_dataPool);
+    _opModel->DoOperation(op);
 }
 
 void AppController::FillDebugData()

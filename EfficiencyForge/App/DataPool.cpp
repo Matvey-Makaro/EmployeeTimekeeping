@@ -25,4 +25,5 @@ QVector<ReportItemTypeShp> DataPool::GetReportItemTypes() const
 void DataPool::SetReportItemTypes(const QVector<ReportItemTypeShp>& reportItemTypes)
 {
     _reportItemTypes = reportItemTypes;
+    emit ReportItemTypesChanged(_reportItemTypes);
 }

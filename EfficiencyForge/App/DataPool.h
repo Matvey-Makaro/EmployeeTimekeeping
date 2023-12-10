@@ -20,6 +20,7 @@ public:
 
 signals:
     void CurrUserChanged(const UserShp&);
+    void ReportItemTypesChanged(const  QVector<ReportItemTypeShp>&);
 
 private:
     UserShp _currUser;

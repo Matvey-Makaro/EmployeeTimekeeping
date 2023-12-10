@@ -28,7 +28,35 @@ QVariant ReportTableViewModel::data(const QModelIndex& index, int role) const
     if(item.isNull())
         return value;
 
-    if(role == Qt::DisplayRole || role == Qt::EditRole)
+    if(role == Qt::DisplayRole)
+    {
+        qDebug() << "ReportTableViewModel::data()" << "itemId:" << item->GetId() << "type: " << item->GetType();
+        if(index.column() == StartTime)
+        {
+            value = item->GetStart();
+        }
+        else if(index.column() == EndTime)
+        {
+            value = item->GetEnd();
+        }
+        else if(index.column() == Text)
+        {
+            value = item->GetText();
+        }
+        else if(index.column() == TypeName)
+        {
+            const auto& type = item->GetType();
+            if(!type.isNull())
+                value = type->GetName();
+        }
+        else if(index.column() == TaskName)
+        {
+            const auto& task = item->GetTask();
+            if(!task.isNull())
+                value = task->GetName();
+        }
+    }
+    else if(role == Qt::EditRole)
     {
         if(index.column() == StartTime)
         {
@@ -47,14 +75,14 @@ QVariant ReportTableViewModel::data(const QModelIndex& index, int role) const
             const auto& type = item->GetType();
             if(!type.isNull())
                 value = type->GetId();
-            else value = -1;
+            else value = InvalidId;
         }
         else if(index.column() == TaskName)
         {
             const auto& task = item->GetTask();
             if(!task.isNull())
                 value = task->GetId();
-            else value = -1;
+            else value = InvalidId;
         }
     }
     return value;
@@ -95,9 +123,8 @@ bool ReportTableViewModel::setData(const QModelIndex& index, const QVariant& val
         }
         else if(index.column() == TaskName)
         {
-            const auto& task = item->GetTask();
-            if(!task.isNull())
-                task->SetName(value.toString());
+            Id id = value.toLongLong();
+            item->SetTask(_tasks[id]);
         }
         return true;
     }
@@ -154,6 +181,18 @@ QString ReportTableViewModel::ToStr(ReportTableViewModel::Cols col) const
     Q_ASSERT(false);
     return "Unknown";
 
+}
+
+std::map<Id, TaskShp> ReportTableViewModel::GetTasks() const
+{
+    return _tasks;
+}
+
+void ReportTableViewModel::SetTasks(const QVector<TaskShp>& tasks)
+{
+    _tasks.clear();
+    for(const auto& t : tasks)
+        _tasks[t->GetId()] = t;
 }
 
 const std::map<Id, ReportItemTypeShp>& ReportTableViewModel::GetItemTypes() const

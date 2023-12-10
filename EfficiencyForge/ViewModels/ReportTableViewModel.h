@@ -37,11 +37,15 @@ public:
     const std::map<Id, ReportItemTypeShp>& GetItemTypes() const;
     void SetItemTypes(const QVector<ReportItemTypeShp>& itemTypes);
 
+    std::map<Id, TaskShp> GetTasks() const;
+    void SetTasks(const QVector<TaskShp>& tasks);
+
 private:
     QString ToStr(Cols col) const;
 
 private:
     QVector<ReportItemShp> _items;
     std::map<Id, ReportItemTypeShp> _itemTypes;
+    std::map<Id, TaskShp> _tasks;
 };
 

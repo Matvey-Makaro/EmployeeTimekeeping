@@ -1,7 +1,9 @@
 #include <QTimeEdit>
 #include <QComboBox>
+#include <QLineEdit>
 #include "ReportTableViewModel.h"
 #include "ReportItemDelegate.h"
+#include "TypeTraits.h"
 
 ReportItemDelegate::ReportItemDelegate(QObject* parent) :
     QStyledItemDelegate(parent)
@@ -18,6 +20,11 @@ QWidget* ReportItemDelegate::createEditor(QWidget* parent,
         //        timeEdit->setFrame(false);
         return timeEdit;
     }
+    else if(index.column() == ReportTableViewModel::Cols::Text)
+    {
+        QLineEdit* lineEdit = new QLineEdit(parent);
+        return lineEdit;
+    }
     else if(index.column() == ReportTableViewModel::Cols::TypeName)
     {
         QComboBox* comboBox = new QComboBox(parent);
@@ -32,7 +39,8 @@ QWidget* ReportItemDelegate::createEditor(QWidget* parent,
             comboBox->addItem(t.second->GetName(), t.first);
         return comboBox;
     }
-    return QStyledItemDelegate::createEditor(parent, option, index);
+    Q_ASSERT(false);
+    return nullptr;
 }
 
 void ReportItemDelegate::setEditorData(QWidget* editor, const QModelIndex& index) const
@@ -45,10 +53,17 @@ void ReportItemDelegate::setEditorData(QWidget* editor, const QModelIndex& index
         timeEdit->setTime(time);
         return;
     }
+    else if(index.column() == ReportTableViewModel::Cols::Text)
+    {
+        QString text = index.model()->data(index, Qt::EditRole).toString();
+        QLineEdit* lineEdit = static_cast<QLineEdit*>(editor);
+        lineEdit->setText(text);
+        return;
+    }
     else if(index.column() == ReportTableViewModel::Cols::TypeName)
     {
         Id itemTypeId = index.model()->data(index, Qt::EditRole).toLongLong();
-        if(itemTypeId == -1)
+        if(itemTypeId == InvalidId)
             itemTypeId = _itemTypes.begin()->first;
         QComboBox* comboBox = static_cast<QComboBox*>(editor);
         comboBox->setCurrentText(_itemTypes.at(itemTypeId)->GetName());
@@ -56,10 +71,11 @@ void ReportItemDelegate::setEditorData(QWidget* editor, const QModelIndex& index
     else if(index.column() == ReportTableViewModel::Cols::TaskName)
     {
         Id taskId = index.model()->data(index, Qt::EditRole).toLongLong();
+        if(taskId == InvalidId)
+            return;
         QComboBox* comboBox = static_cast<QComboBox*>(editor);
         comboBox->setCurrentText(_tasks.at(taskId)->GetName());
     }
-    QStyledItemDelegate::setEditorData(editor, index);
 }
 
 void ReportItemDelegate::setModelData(QWidget* editor, QAbstractItemModel* model, const QModelIndex& index) const
@@ -74,6 +90,14 @@ void ReportItemDelegate::setModelData(QWidget* editor, QAbstractItemModel* model
         model->setData(index, time, Qt::EditRole);
         return;
     }
+    else if(index.column() == ReportTableViewModel::Cols::Text)
+    {
+        QLineEdit* lineEdit = static_cast<QLineEdit*>(editor);
+        QString text = lineEdit->text();
+
+        model->setData(index, text, Qt::EditRole);
+        return;
+    }
     else if(index.column() == ReportTableViewModel::Cols::TypeName ||
             index.column() == ReportTableViewModel::Cols::TaskName)
     {
@@ -81,20 +105,13 @@ void ReportItemDelegate::setModelData(QWidget* editor, QAbstractItemModel* model
         Id id = comboBox->currentData().toLongLong();
         model->setData(index, id, Qt::EditRole);
     }
-    QStyledItemDelegate::setModelData(editor, model, index);
 }
 
 void ReportItemDelegate::updateEditorGeometry(QWidget* editor, const QStyleOptionViewItem& option, const QModelIndex& index) const
 {
-    if(index.column() == ReportTableViewModel::Cols::StartTime ||
-            index.column() == ReportTableViewModel::Cols::EndTime ||
-            index.column() == ReportTableViewModel::Cols::TypeName ||
-            index.column() == ReportTableViewModel::Cols::TaskName)
-    {
-        editor->setGeometry(option.rect);
+    if(!index.isValid())
         return;
-    }
-    QStyledItemDelegate::updateEditorGeometry(editor, option, index);
+    editor->setGeometry(option.rect);
 }
 
 void ReportItemDelegate::SetItemTypes(const QVector<ReportItemTypeShp>& itemTypes)

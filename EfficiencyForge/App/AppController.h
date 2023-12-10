@@ -32,6 +32,7 @@ private:
     void ConnectWithDataPool() const;
     void ConnectWithAuthorizationWidget() const;
     void Start();
+    void InitLoad();
 
     void FillDebugData();
 
