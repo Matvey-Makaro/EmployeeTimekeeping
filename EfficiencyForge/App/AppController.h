@@ -6,7 +6,7 @@
 #include "Entities/User.h"
 #include "DataPool.h"
 #include "GUI/Authorization.h"
-#include "GUI/MainWindow.h"
+#include "GUI/BaseMainWidget.h"
 
 class AppController : public QObject
 {
@@ -33,11 +33,13 @@ private:
     void ConnectWithAuthorizationWidget() const;
     void Start();
 
+    void FillDebugData();
+
 private:
     IOperationModelShp _opModel;
     DataPoolShp _dataPool;
     AuthorizationShp _authorizationWidget;
-    MainWindowShp _mainWindow;
+    BaseMainWidgetShp _baseMainWidget;
 };
 
 using AppModelShp = QSharedPointer<AppController>;

@@ -16,3 +16,13 @@ void DataPool::SetCurrUser(UserShp& user)
     _currUser = std::move(user);
     emit CurrUserChanged(_currUser);
 }
+
+QVector<ReportItemTypeShp> DataPool::GetReportItemTypes() const
+{
+    return _reportItemTypes;
+}
+
+void DataPool::SetReportItemTypes(const QVector<ReportItemTypeShp>& reportItemTypes)
+{
+    _reportItemTypes = reportItemTypes;
+}

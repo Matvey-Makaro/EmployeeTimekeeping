@@ -16,6 +16,9 @@ public:
     explicit Authorization(QWidget *parent = nullptr);
     ~Authorization();
 
+protected:
+    void keyPressEvent(QKeyEvent* event) override;
+
 signals:
     void TryingLogIn(const QString& login, const QString& password);
 

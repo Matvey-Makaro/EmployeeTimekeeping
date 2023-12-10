@@ -17,7 +17,7 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_3">
      <item>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="saveBtn">
        <property name="text">
         <string>Сохранить</string>
        </property>
@@ -39,7 +39,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QTimeEdit" name="timeEdit"/>
+        <widget class="QTimeEdit" name="startTimeEdit"/>
        </item>
       </layout>
      </item>
@@ -56,7 +56,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QTimeEdit" name="timeEdit_2"/>
+        <widget class="QTimeEdit" name="endTimeEdit"/>
        </item>
        <item>
         <spacer name="horizontalSpacer">
@@ -78,21 +78,21 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_4">
      <item>
-      <widget class="QPushButton" name="pushButton_3">
+      <widget class="QPushButton" name="addBtn">
        <property name="text">
         <string>Добавить</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_4">
+      <widget class="QPushButton" name="deleteBtn">
        <property name="text">
         <string>Удалить</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_2">
+      <widget class="QPushButton" name="selectWorksBtn">
        <property name="text">
         <string>Подобрать работы</string>
        </property>
@@ -156,7 +156,7 @@
     <widget class="ActivityRecordWidget" name="widget" native="true"/>
    </item>
    <item>
-    <widget class="QListView" name="listView"/>
+    <widget class="QTableView" name="tableView"/>
    </item>
   </layout>
  </widget>

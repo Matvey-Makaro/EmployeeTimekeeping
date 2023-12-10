@@ -110,6 +110,11 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>LoginLineEdit</tabstop>
+  <tabstop>PasswordLineEdit</tabstop>
+  <tabstop>EnterButton</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
